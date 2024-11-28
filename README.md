@@ -100,6 +100,79 @@ These insights highlight a strong demand for programming languages (Python, SQL,
 
 ![image](https://github.com/user-attachments/assets/b9711bd7-6adb-477d-a311-87f5f02d930c)
 
+### 3. In-Demand Skills for Data Scientists
+This query identified the most frequently requested skills in job postings, directing focus to areas with high demand.
+
+```sql
+SELECT 
+    skills,
+    COUNT(skills_job_dim.job_id) AS demand_count
+FROM job_postings_fact
+    INNER JOIN skills_job_dim ON job_postings_fact.job_id = skills_job_dim.job_id
+    INNER JOIN skills_dim ON skills_job_dim.skill_id = skills_dim.skill_id
+WHERE
+    job_title_short = 'Data Scientist' AND
+    job_schedule_type = 'Full-time' AND
+    (job_title LIKE '%Junior%' OR job_title LIKE '%Entry%')
+GROUP BY
+    skills
+ORDER BY
+    demand_count DESC
+LIMIT 5
+```
+- Python and SQL are foundational skills for almost every data science role.
+- Specialized tools like R and SAS are valuable for statistical modeling and industry-specific applications.
+- Proficiency in visualization tools like Tableau is essential for presenting data-driven insights effectively.
+- Aspiring data scientists should prioritize learning Python and SQL while supplementing their skill set with at least one statistical tool (R/SAS) and a visualization tool (Tableau) to stay competitive.
+
+![image](https://github.com/user-attachments/assets/be5d8689-c7ee-4f10-aa58-3c3706216a1c)
+
+
+### 4. Skills Based on Salary
+
+Exploring the average salaries associated with different skills revealed which skills are the highest paying.
+
+```sql
+SELECT 
+    skills,
+    ROUND(AVG(salary_year_avg), 0) AS avg_salary
+FROM job_postings_fact
+    INNER JOIN skills_job_dim ON job_postings_fact.job_id = skills_job_dim.job_id
+    INNER JOIN skills_dim ON skills_job_dim.skill_id = skills_dim.skill_id
+
+WHERE
+    job_title_short = 'Data Scientist' AND
+    job_schedule_type = 'Full-time' AND
+    (job_title LIKE '%Junior%' OR job_title LIKE '%Entry%')
+    AND salary_year_avg IS NOT NULL
+GROUP BY
+    skills
+ORDER BY
+    avg_salary DESC
+LIMIT 25
+```
+
+- Specialized Tools Command Premium Salaries: Airflow, Hadoop, and Qlik emphasize the value of advanced data engineering, big data, and visualization skills.
+- Cloud and Database Expertise Are Highly Valued: PostgreSQL, MongoDB, IBM Cloud, and AWS illustrate the importance of managing and analyzing data in modern environments.
+- Versatile Programming and Deployment Skills Add Value: C# and Bitbucket reflect the integration of software development and data science.
+
+Data scientists aiming for high-paying roles should:
+
+- Focus on acquiring data engineering tools like Airflow and Hadoop.
+- Build proficiency in database management (PostgreSQL, MongoDB) and cloud platforms (AWS, IBM Cloud).
+- Consider specialization in business intelligence tools (Qlik, MicroStrategy) to align with enterprise-level analytics roles.
+
+![image](https://github.com/user-attachments/assets/e1e89dc6-58bd-4295-9104-b6a7277255fe)
+
+
+
+
+
+
+
+
+
+
 
 # Learnings
 # Conclusions
