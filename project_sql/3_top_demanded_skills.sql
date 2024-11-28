@@ -8,8 +8,6 @@ providing insights into the most valuable skills for job seekers.
 
 */
 
-
-
 SELECT 
     skills,
     COUNT(skills_job_dim.job_id) AS demand_count
@@ -20,11 +18,10 @@ WHERE
     job_title_short = 'Data Scientist' AND
     job_schedule_type = 'Full-time' AND
     (job_title LIKE '%Junior%' OR job_title LIKE '%Entry%')
-
 GROUP BY
     skills
 ORDER BY
     demand_count DESC
-LIMIT 10
+LIMIT 5
 
 
