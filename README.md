@@ -62,6 +62,43 @@ Here's the breakdown of the top data scientist jobs:
 
 ![image](https://github.com/user-attachments/assets/7bfdceb6-9bf2-4a6a-98b8-0fda88e321e4)
 
+### 2. Skills for Top Paying Jobs
+To understand required skills for the top-paying jobs, the job postings with the skills data are joined, providing insights into what employers value for high-compensation roles.
+
+```sql
+WITH top_paying_jobs AS 
+(SELECT
+ job_id,
+  job_title,
+  job_location,
+  job_schedule_type,
+  salary_year_avg,
+  job_posted_date,
+  name AS company_name
+FROM
+  job_postings_fact
+LEFT JOIN company_dim ON job_postings_fact.company_id = company_dim.company_id
+WHERE 
+  job_title_short = 'Data Scientist' AND
+  job_schedule_type = 'Full-time' AND
+  (job_title LIKE '%Junior%' OR job_title LIKE '%Entry%') AND
+  salary_year_avg IS NOT NULL
+ORDER BY
+  salary_year_avg DESC)
+
+SELECT
+    top_paying_jobs.*,
+    skills
+FROM 
+    top_paying_jobs
+INNER JOIN skills_job_dim ON top_paying_jobs.job_id = skills_job_dim.job_id
+INNER JOIN skills_dim ON skills_job_dim.skill_id = skills_dim.skill_id
+ORDER BY
+    salary_year_avg DESC
+```
+These insights highlight a strong demand for programming languages (Python, SQL, R) and data tools (SAS, Tableau, Spark), alongside cloud computing skills (AWS).
+
+![image](https://github.com/user-attachments/assets/b9711bd7-6adb-477d-a311-87f5f02d930c)
 
 
 # Learnings
