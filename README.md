@@ -165,14 +165,76 @@ Data scientists aiming for high-paying roles should:
 ![image](https://github.com/user-attachments/assets/e1e89dc6-58bd-4295-9104-b6a7277255fe)
 
 
+### 5. Most Optimal Skills to Learn
+
+This query aimed to identify skills that are both in high demand and command high salaries by analyzing demand and salary data, providing strategic guidance for skill development.
+
+```sql
+SELECT
+    skills_dim.skill_id,
+    skills_dim.skills,
+    COUNT(skills_job_dim.job_id) AS demand_count,
+    ROUND(AVG(salary_year_avg),0) AS avg_salary
+FROM job_postings_fact
+INNER JOIN skills_job_dim ON job_postings_fact.job_id = skills_job_dim.job_id
+INNER JOIN skills_dim ON skills_job_dim.skill_id = skills_dim.skill_id
+
+WHERE
+    job_title_short = 'Data Scientist'
+    AND salary_year_avg IS NOT NULL
+    AND job_work_from_home = True
+GROUP BY
+    skills_dim.skill_id
+HAVING
+    COUNT(skills_job_dim.job_id) > 10
+ORDER BY
+    avg_salary DESC,
+    demand_count DESC
+LIMIT 25;
+```
+![image](https://github.com/user-attachments/assets/491ae212-e243-4bd3-a949-f1c61dda1c51)
+
+### Key Observations:
+
+High-Paying and High-Demand Skills:
+- Go, Snowflake, and PyTorch stand out for their combination of demand and competitive salaries.
+These skills represent a mix of backend systems, cloud-based data management, and machine learning.
+
+Emerging Technologies:
+
+- Tools like Airflow and BigQuery are critical for modern data pipelines and cloud analytics.
+BI tools like Qlik and Looker highlight the continued value of turning data into actionable business insights.
+
+Programming Languages:
+
+- C, Go, and Scala emphasize the need for efficient, high-performance, and big data-focused programming.
+
+### Recommendation:
+To maximize earning potential and job opportunities, data scientists should:
+
+Invest in AI and ML skills:
+- Learn PyTorch for cutting-edge AI roles.
+
+Master cloud-based tools:
+- Focus on Snowflake, GCP, and Airflow for data engineering and analytics in scalable environments.
+
+Explore BI platforms:
+- Gain expertise in Looker and Qlik for high-impact roles in data visualization and business decision-making.
+
+Expand programming expertise:
+- Complement Python knowledge with Go and Scala for backend and big data tasks.
+This skillset positions professionals to excel in both high-demand and high-paying roles in the evolving data science landscape.
 
 
-
-
-
-
-
-
-
-# Learnings
 # Conclusions
+
+### Insights
+
+1. Top-Paying Data Analyst Jobs: The highest-paying jobs for entry level data scientists offer a wide range of salaries, the highest at $155,000.
+2. Skills for Top-Paying Jobs: Top-paying jobs require advanced programming languages (Python, SQL, R) and data tools (SAS, Tableau, Spark) knowledge.
+3. Most In-Demand Skills: Python and SQL are the most demanded skills in the data science job market, while at least one statistical tool (R/SAS) and a visualization tool (Tableau) are required to stay competitive.
+4. Skills with Higher Salaries: Data engineering tools(Airflow and Hadoop), database management tools(PostgreSQL, MongoDB) and cloud platforms(AWS, IBM Cloud) and BI tools(Qlik, MicroStrategy) are associated with the highest average salaries.
+5. Optimal Skills for Job Market Value: AI and ML skills(PyTorch), data engineering tools(Snowflake, GCP, Airflow), BI platforms(Looker, Qlik) should be prioritized to maximize job opportunities for data scientists.
+
+This project enhanced my SQL skills and provided valuable insights into data science job market. For a junior data scientist who is looking for his/her first job, this exploration highlights the importance of learning and adaptation to emerging trends in the field of data science.
+  
