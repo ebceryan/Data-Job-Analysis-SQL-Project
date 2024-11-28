@@ -7,9 +7,10 @@ FROM job_postings_fact
     INNER JOIN skills_dim ON skills_job_dim.skill_id = skills_dim.skill_id
 
 WHERE
-    job_title_short = 'Data Analyst' 
+    job_title_short = 'Data Scientist' AND
+    job_schedule_type = 'Full-time' AND
+    (job_title LIKE '%Junior%' OR job_title LIKE '%Entry%')
     AND salary_year_avg IS NOT NULL
-    AND job_work_from_home = TRUE
 GROUP BY
     skills
 ORDER BY
@@ -17,31 +18,29 @@ ORDER BY
 LIMIT 25
 
 /*
-Here are some insights and trends from the provided list of top-paying skills for data analysts:
+Here are some insights and trends from the provided list of top-paying skills for data scientists:
 
-1. Emerging Technologies Command Premium Salaries
-Skills such as PySpark ($208,172) and Bitbucket ($189,155) dominate the top tier, reflecting the demand for expertise in large-scale data processing and modern version control systems.
-Tools associated with advanced analytics and automation, like DataRobot ($155,486), show strong demand for analysts with AI and machine learning automation skills.
-2. Cloud and Distributed Systems Are Highly Valued
-Cloud-related skills like Databricks ($141,907) and GCP ($122,500) are prominent. These platforms are critical for big data analysis and scalable solutions, emphasizing that cloud expertise is essential for high-paying data analyst roles.
-3. Programming Proficiency Remains a Core Requirement
-Programming languages such as Swift ($153,750), Scala ($124,903), and Golang ($145,000) command strong salaries, demonstrating the continued need for advanced coding capabilities.
-Core data analysis libraries such as Pandas ($151,821), NumPy ($143,513), and Scikit-learn ($125,781) highlight the enduring importance of Python and its ecosystem.
-4. DevOps and CI/CD Knowledge Boosts Analyst Salaries
-Tools like GitLab ($154,500), Jenkins ($125,436), and Kubernetes ($132,500) indicate the growing need for analysts to work with development and deployment pipelines. This trend aligns with the shift towards MLOps and operationalizing analytics.
-5. Visualization and Collaboration Platforms Play a Role
-Skills like Jupyter ($152,777) and Notion ($125,000) are valued, suggesting that the ability to present findings and collaborate effectively is critical for top-paying roles.
-6. Database and Query Optimization Knowledge
-PostgreSQL ($123,879) and Elasticsearch ($145,000) illustrate the value of expertise in handling, querying, and optimizing large datasets, which is fundamental for data analysts.
-7. Trend Toward Automation and AI Integration
-Tools like Airflow ($126,103) and Watson ($160,515) reflect the increasing emphasis on automation and AI-driven decision-making, positioning data analysts with these skills for higher salaries.
+Top Earners: Skills like Airflow and C# lead with $115,000, followed by PostgreSQL, Hadoop, and MongoDB ($108,000+), reflecting demand for orchestration, programming, and big data expertise.
 
-Conclusion
-To secure top-paying roles as a data analyst, individuals should:
+Big Data Dominance: Tools such as Hadoop and Spark ($98,000) highlight the demand for handling large-scale data processing.
 
-Gain proficiency in big data tools (e.g., PySpark, Databricks).
-Invest in cloud and distributed system knowledge (e.g., GCP, Kubernetes).
-Develop advanced coding and machine learning automation skills (e.g., Swift, Scikit-learn, DataRobot).
-Familiarize themselves with DevOps tools and CI/CD pipelines.
-Enhance database expertise and visualization capabilities.
-*/
+Cloud Skills: IBM Cloud ($102,200) and AWS ($100,822) show the importance of cloud computing in the job market.
+
+Database Proficiency: Expertise in PostgreSQL, SQL Server ($100,000), and NoSQL technologies ($97,500) commands high salaries.
+
+DevOps Tools: Skills in Git, Jenkins ($94,375), and Docker ($92,510) emphasize the value of CI/CD and containerization.
+
+Programming Languages: C#, Java ($94,484), and C++ ($93,862) remain highly rewarded.
+
+Data Visualization: Tools like Qlik ($105,900) and Tableau ($95,158) reflect the need for effective data communication.
+
+AI and ML Frameworks: Keras ($95,496) highlights the demand for machine learning expertise.
+
+Emerging Technologies: Skills in Kafka ($93,750) and Splunk ($93,538) demonstrate the value of real-time data processing.
+
+Key Takeaway: Combining these skills with broader expertise increases earning potential and market competitiveness.
+
+Recommendations:
+Upskill in High-Paying Areas: Professionals should focus on acquiring or enhancing skills like Airflow, C#, Hadoop, and PostgreSQL to target the higher salary range.
+Leverage Cloud and Big Data: Mastery of tools like AWS, MongoDB, and Spark is increasingly critical in industries like finance, healthcare, and e-commerce.
+Develop Versatility: Combining skills in programming (e.g., C#, Java), database management (e.g., SQL Server), and visualization tools (e.g., Tableau, Qlik) can make candidates more versatile and attractive to employers.
